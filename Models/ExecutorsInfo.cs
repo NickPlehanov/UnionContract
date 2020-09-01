@@ -20,5 +20,13 @@ namespace UnionContractWF.Models {
         public string Address { get; set; }
         public string BossInfo { get; set; }
         public string BossCompany { get; set; }
+        public string LicNum { get; set; }
+        public string LicIssued { get; set; }
+        public string LicIssuedDate { get; set; }
+        public string LicenseExpired { get; set; }
+        public string LicenseDelo { get; set; }
+        public string LicenseAddress { get; set; }
+        public string LicensePhone { get; set; }
+        public string BossPhone { get; set; }
     }
 }

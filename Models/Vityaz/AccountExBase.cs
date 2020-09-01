@@ -17,6 +17,7 @@ namespace UnionContractWF.Models.Vityaz {
         public int? New_agent_type { get; set; }
         public int? New_send_acts { get; set; }
         public int? new_poryadok_acts { get; set; }
+        public string new_smallname { get; set; }
 
         
         private string _Send_acts { get; set; }

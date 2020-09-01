@@ -97,9 +97,18 @@ namespace UnionContractWF {
                                                             + item.New_Web,
                                                         BossPosition = item.New_boss_name + " " + item.New_name,
                                                         Bossname = item.New_boss_fiio,
-                                                        LicenseInfo = item.New_name + ", лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",
+                                                        //LicenseInfo = item.New_name + ", лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",
+                                                        LicenseInfo = "лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",
                                                         FullName = item.New_FullName,
-                                                        Name = item.New_name
+                                                        Name = item.New_name,
+                                                        LicNum = item.New_license_no,
+                                                        LicIssued = item.New_license_issued_who,
+                                                        LicIssuedDate= DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString(),
+                                                        LicenseExpired = DateTime.Parse(item.New_license_issued_till.ToString()).AddHours(5).ToShortDateString(),
+                                                        LicenseAddress = item.New_address,
+                                                        LicensePhone = item.New_phone,
+                                                        BossPhone = item.New_BossPhone,
+                                                        LicenseDelo = item.New_license_case
                                                     });
                                                 else
                                                     executorsInfos.Add(new ExecutorsInfo() {
@@ -118,7 +127,8 @@ namespace UnionContractWF {
                                                             + item.New_Web,
                                                         BossPosition = item.New_boss_name + " " + item.New_name,
                                                         Bossname = item.New_boss_fiio,
-                                                        LicenseInfo = item.New_FullName + "именуемое в дальнейшем «Исполнитель» , лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",
+                                                        //LicenseInfo = item.New_FullName + "именуемое в дальнейшем «Исполнитель» , лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",                                                       
+                                                        LicenseInfo ="лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",
                                                         FullName = item.New_FullName,
                                                         Name = item.New_name,
                                                         Lic = "Лицензия № " + item.New_license_no + ", выдана " + item.New_license_issued_who,
@@ -126,7 +136,15 @@ namespace UnionContractWF {
                                                         LicCase = item.New_license_case,
                                                         Address = item.New_address + ", тел. " + item.New_phone,
                                                         BossInfo = item.New_boss_name + " " + item.New_boss_fiio + ", тел.:" + item.New_BossPhone,
-                                                        BossCompany = item.New_boss_name + " " + item.New_name + " " + "                                                   " + item.New_boss_fiio
+                                                        BossCompany = item.New_boss_name + " " + item.New_name + " " + "                                                   " + item.New_boss_fiio,
+                                                        LicNum = item.New_license_no,
+                                                        LicIssued = item.New_license_issued_who,
+                                                        LicIssuedDate = DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString(),
+                                                        LicenseExpired = DateTime.Parse(item.New_license_issued_till.ToString()).AddHours(5).ToShortDateString(),
+                                                        LicenseAddress = item.New_address,
+                                                        LicensePhone = item.New_phone,
+                                                        BossPhone = item.New_BossPhone,
+                                                        LicenseDelo = item.New_license_case
                                                     });
                                             }
                                         }
@@ -136,6 +154,7 @@ namespace UnionContractWF {
                                         contract.Number = AgreementExBase.New_number.ToString();
                                         contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString();
                                         contract.ClientName = AccountBase.Name;
+                                        contract.ClientSmallName = AccountExBase.new_smallname;
                                         contract.ObjectName = GuardObjectExBase.New_name;
                                         contract.ObjectAddress = GuardObjectExBase.New_addr_kladr;
                                         if (GuardObjectExBase.New_cost.HasValue) {
@@ -174,16 +193,26 @@ namespace UnionContractWF {
                                         if (bool.Parse(GuardObjectExBase.New_protection_os.ToString())) {
                                             contract.ObjectTypeService = "охрана имущества" + Environment.NewLine;
                                             contract.ObjectSignalization = "Охранная сигнализация"+Environment.NewLine;
+                                            contract.os = "■ охрана имущества" + Environment.NewLine;
                                         }
+                                        else
+                                            contract.os = "□ охрана имущества" + Environment.NewLine;
                                         if (bool.Parse(GuardObjectExBase.New_protection_ps.ToString())) {
                                             contract.ObjectTypeService += "реагирование на сигналы пожар" + Environment.NewLine;
                                             contract.ObjectSignalization = "Пожарная сигнализация" + Environment.NewLine;
+                                            contract.ps = "■ реагирование на сигналы пожар" + Environment.NewLine;
                                         }
+                                        else
+                                            contract.ps = "□ реагирование на сигналы пожар" + Environment.NewLine;
                                         if (bool.Parse(GuardObjectExBase.New_protection_trs.ToString())) {
                                             contract.ObjectTypeService += "экстренный выезд по тревожной сигнализации" + Environment.NewLine;
                                             contract.ObjectSignalization = "Тревожная сигнализация" + Environment.NewLine;
+                                            contract.trs = "■ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
                                         }
+                                        else
+                                            contract.trs = "□ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
                                         contract.ObjectTypeService += "эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
+                                        contract.service_security = "■ эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
                                         if (bool.Parse(GuardObjectExBase.New_protection_os.ToString()) && bool.Parse(GuardObjectExBase.New_protection_ps.ToString()) && bool.Parse(GuardObjectExBase.New_protection_trs.ToString()))
                                             contract.BlockType = "полной";
                                         else
@@ -194,9 +223,12 @@ namespace UnionContractWF {
                                                 //contract.DeviceName += item.DeviceExBase.New_name + Environment.NewLine;
                                                 contract.DeviceName += deviceExBaseContext.DeviceExBase.FirstOrDefault(x => x.New_deviceId == item.New_device_rent_device).New_name + Environment.NewLine;
                                                 contract.DeviceCount += item.New_qty + Environment.NewLine;
-                                                contract.DeviceSum += (item.New_qty * item.New_price) + Environment.NewLine;
+                                                if (item.New_price.HasValue)
+                                                    contract.DeviceSum += (item.New_qty * Decimal.Round(decimal.Parse(item.New_price.ToString()),2)) + Environment.NewLine;
+                                                else
+                                                    contract.DeviceSum += Environment.NewLine;
                                                 if (!string.IsNullOrEmpty(item.New_price.ToString()) && !string.IsNullOrEmpty(item.New_qty.ToString()))
-                                                    _sum += (decimal)(item.New_qty * item.New_price);
+                                                    _sum += Decimal.Round((decimal)(item.New_qty * item.New_price),2);
                                             }
                                         }
                                         contract.AllCount = Rent_DeviceExBase.Count.ToString();
