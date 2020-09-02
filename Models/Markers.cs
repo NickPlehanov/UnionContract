@@ -12,6 +12,8 @@ namespace UnionContractWF.Models {
         public static object ExecutorFullName = "ExecutorFullName";
         public static object ExecutorLicenseInfo = "ExecutorLicenseInfo";
         public static object CoExecutorsLicenseInfo = "CoExecutorsLicenseInfo";
+        public static object BlockTypeDistinct = "BlockTypeDistinct";
+        public static object BlockTypeFull = "BlockTypeFull";
         public static object ObjectName = "ObjectName";
         public static object ObjectAddress = "ObjectAddress";
         public static object ObjectCost = "ObjectCost";

@@ -103,7 +103,7 @@ namespace UnionContractWF {
                                                         Name = item.New_name,
                                                         LicNum = item.New_license_no,
                                                         LicIssued = item.New_license_issued_who,
-                                                        LicIssuedDate= DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString(),
+                                                        LicIssuedDate = DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString(),
                                                         LicenseExpired = DateTime.Parse(item.New_license_issued_till.ToString()).AddHours(5).ToShortDateString(),
                                                         LicenseAddress = item.New_address,
                                                         LicensePhone = item.New_phone,
@@ -128,7 +128,7 @@ namespace UnionContractWF {
                                                         BossPosition = item.New_boss_name + " " + item.New_name,
                                                         Bossname = item.New_boss_fiio,
                                                         //LicenseInfo = item.New_FullName + "именуемое в дальнейшем «Исполнитель» , лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",                                                       
-                                                        LicenseInfo ="лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",
+                                                        LicenseInfo = "лицензия № " + item.New_license_no + ", выдана " + DateTime.Parse(item.New_license_issued_when.ToString()).AddHours(5).ToShortDateString() + " " + item.New_license_issued_who + ", в лице " + item.New_boss_namer + " " + item.New_boss_fior + ", действующего на основании Устава",
                                                         FullName = item.New_FullName,
                                                         Name = item.New_name,
                                                         Lic = "Лицензия № " + item.New_license_no + ", выдана " + item.New_license_issued_who,
@@ -168,13 +168,14 @@ namespace UnionContractWF {
                                         contract.SendActs = AccountExBase.Send_acts;
                                         contract.PoryadokActs = AccountExBase.Poryadok_acts;
                                         if (AccountExBase.New_agent_type == 1) {
+                                            string pass_date = DateTime.TryParse(AccountExBase.New_pass_date.ToString(), out _) ? DateTime.Parse(AccountExBase.New_pass_date.ToString()).AddHours(5).ToShortDateString() + Environment.NewLine : "" + Environment.NewLine;
                                             contract.ClientInfo = AccountBase.Name + Environment.NewLine
                                                 + "ИНН " + AccountExBase.New_req_inn + Environment.NewLine
                                                 + "Адрес регистрации: " + AccountExBase.New_fact_addr_kladr + Environment.NewLine
                                                 + "Почтовый адрес: " + AccountExBase.New_fact_addr_kladr + Environment.NewLine
                                                 + "Серия: " + AccountExBase.New_pass_serial + " Номер: " + AccountExBase.New_pass_number + Environment.NewLine
                                                 + "Выдан: " + AccountExBase.New_pass_issued + Environment.NewLine
-                                                + "Дата выдачи: " + DateTime.Parse(AccountExBase.New_pass_date.ToString()).AddHours(5).ToShortDateString() + Environment.NewLine
+                                                + "Дата выдачи: " + pass_date
                                                 + "e-mail: " + AccountBase.EMailAddress1;
                                         }
                                         else
@@ -192,7 +193,7 @@ namespace UnionContractWF {
                                         }
                                         if (bool.Parse(GuardObjectExBase.New_protection_os.ToString())) {
                                             contract.ObjectTypeService = "охрана имущества" + Environment.NewLine;
-                                            contract.ObjectSignalization = "Охранная сигнализация"+Environment.NewLine;
+                                            contract.ObjectSignalization = "Охранная сигнализация" + Environment.NewLine;
                                             contract.os = "■ охрана имущества" + Environment.NewLine;
                                         }
                                         else
@@ -213,10 +214,22 @@ namespace UnionContractWF {
                                             contract.trs = "□ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
                                         contract.ObjectTypeService += "эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
                                         contract.service_security = "■ эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
-                                        if (bool.Parse(GuardObjectExBase.New_protection_os.ToString()) && bool.Parse(GuardObjectExBase.New_protection_ps.ToString()) && bool.Parse(GuardObjectExBase.New_protection_trs.ToString()))
-                                            contract.BlockType = "полной";
-                                        else
-                                            contract.BlockType = "усеченной";
+                                        //if (bool.Parse(GuardObjectExBase.New_protection_os.ToString()) && bool.Parse(GuardObjectExBase.New_protection_ps.ToString()) && bool.Parse(GuardObjectExBase.New_protection_trs.ToString()))
+                                        //    contract.BlockType = "полной";
+                                        //else
+                                        //    contract.BlockType = "усеченной";
+                                        if (GuardObjectExBase.New_dogovor_type == 1) {//стандартный тип договора
+                                            contract.BlockTypeFull = "■ c полной блокировкой;";
+                                            contract.BlockTypeDistinct = "□ c усеченной блокировкой;";
+                                        }
+                                        else if (GuardObjectExBase.New_dogovor_type == 2) {
+                                            contract.BlockTypeDistinct = "■ c усеченной блокировкой;";
+                                            contract.BlockTypeFull = "□ c полной блокировкой;";
+                                        }
+                                        else {
+                                            contract.BlockTypeFull = "□ c полной блокировкой;";
+                                            contract.BlockTypeDistinct = "□ c усеченной блокировкой;";
+                                        }
                                         decimal _sum = 0;
                                         using (DeviceExBaseContext deviceExBaseContext = new DeviceExBaseContext()) {
                                             foreach (RentDeviceExBase item in Rent_DeviceExBase) {
@@ -224,11 +237,11 @@ namespace UnionContractWF {
                                                 contract.DeviceName += deviceExBaseContext.DeviceExBase.FirstOrDefault(x => x.New_deviceId == item.New_device_rent_device).New_name + Environment.NewLine;
                                                 contract.DeviceCount += item.New_qty + Environment.NewLine;
                                                 if (item.New_price.HasValue)
-                                                    contract.DeviceSum += (item.New_qty * Decimal.Round(decimal.Parse(item.New_price.ToString()),2)) + Environment.NewLine;
+                                                    contract.DeviceSum += (item.New_qty * Decimal.Round(decimal.Parse(item.New_price.ToString()), 2)) + Environment.NewLine;
                                                 else
                                                     contract.DeviceSum += Environment.NewLine;
                                                 if (!string.IsNullOrEmpty(item.New_price.ToString()) && !string.IsNullOrEmpty(item.New_qty.ToString()))
-                                                    _sum += Decimal.Round((decimal)(item.New_qty * item.New_price),2);
+                                                    _sum += Decimal.Round((decimal)(item.New_qty * item.New_price), 2);
                                             }
                                         }
                                         contract.AllCount = Rent_DeviceExBase.Count.ToString();
@@ -249,7 +262,7 @@ namespace UnionContractWF {
 
         private void Form1_Load(object sender, EventArgs e) {
             using (ContractTypesContext contractTypesContext = new ContractTypesContext()) {
-                ContractTypes = contractTypesContext.ContractTypes.Where(x=>x.ctp_IsActive==true).ToList<ContractTypes>();
+                ContractTypes = contractTypesContext.ContractTypes.Where(x => x.ctp_IsActive == true).ToList<ContractTypes>();
                 cmb_ContractType.DataSource = ContractTypes;
                 cmb_ContractType.DisplayMember = "ctp_Name";
             }

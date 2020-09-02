@@ -15,7 +15,8 @@ namespace UnionContractWF.Models {
         public string ObjectTypeService { get; set; }//типы охранных услуг
         public string ObjectMonthlyPay { get; set; }
         public string OwningUser { get; set; }
-        public string BlockType { get; set; }
+        public string BlockTypeDistinct { get; set; }
+        public string BlockTypeFull { get; set; }
         public string DeviceName { get; set; }
         public string DeviceCount { get; set; }
         public string DeviceSum { get; set; }
