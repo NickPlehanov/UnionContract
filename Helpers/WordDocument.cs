@@ -54,7 +54,7 @@ namespace UnionContractWF.Helpers {
                 string CoExecutorsLicenseInfo="";
                 foreach (ExecutorsInfo item in contract.Coexecutors.Where(x => x.Id != contract.ExecutorID)) 
                     CoExecutorsLicenseInfo += item.Name + ", " + item.LicenseInfo + ";" + Environment.NewLine;
-                oDoc.Bookmarks.get_Item(ref Markers.CoExecutorsLicenseInfo).Range.Text = CoExecutorsLicenseInfo;
+                oDoc.Bookmarks.get_Item(ref Markers.CoExecutorsLicenseInfo).Range.Text = CoExecutorsLicenseInfo.Substring(0, CoExecutorsLicenseInfo.LastIndexOf(';'));
                 oDoc.Bookmarks.get_Item(ref Markers.BlockTypeDistinct).Range.Text = contract.BlockTypeDistinct;
                 oDoc.Bookmarks.get_Item(ref Markers.BlockTypeFull).Range.Text = contract.BlockTypeFull;
                 oDoc.Bookmarks.get_Item(ref Markers.ObjectName).Range.Text = contract.ObjectName;

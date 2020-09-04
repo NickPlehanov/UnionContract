@@ -82,8 +82,8 @@ namespace UnionContractWF {
                                                 if (item.New_executorId != AgreementExBase.New_executor_agreement)
                                                     executorsInfos.Add(new ExecutorsInfo() {
                                                         Id = item.New_executorId,
-                                                        FullInfo = item.New_name + Environment.NewLine
-                                                            + "Местонахождение исполнительного органа:" + Environment.NewLine
+                                                        FullInfo = /*item.New_name + Environment.NewLine
+                                                            +*/ "Местонахождение исполнительного органа:" + Environment.NewLine
                                                             + item.New_address + Environment.NewLine
                                                             + "Многоканальный телефон " + item.New_phone + Environment.NewLine
                                                             + item.New_info1 + Environment.NewLine
@@ -113,8 +113,8 @@ namespace UnionContractWF {
                                                 else
                                                     executorsInfos.Add(new ExecutorsInfo() {
                                                         Id = item.New_executorId,
-                                                        FullInfo = item.New_name + Environment.NewLine
-                                                            + item.New_address + Environment.NewLine
+                                                        FullInfo = /*item.New_name + Environment.NewLine
+                                                            +*/ item.New_address + Environment.NewLine
                                                             + "Многоканальный телефон " + item.New_phone + Environment.NewLine
                                                             + item.New_info1 + Environment.NewLine
                                                             + "ИНН " + item.New_inn + "КПП " + item.New_kpp + Environment.NewLine
@@ -197,21 +197,24 @@ namespace UnionContractWF {
                                             contract.os = "■ охрана имущества" + Environment.NewLine;
                                         }
                                         else
-                                            contract.os = "□ охрана имущества" + Environment.NewLine;
+                                            //contract.os = "□ охрана имущества" + Environment.NewLine;                                            
+                                            contract.os = "";
                                         if (bool.Parse(GuardObjectExBase.New_protection_ps.ToString())) {
                                             contract.ObjectTypeService += "реагирование на сигналы пожар" + Environment.NewLine;
                                             contract.ObjectSignalization = "Пожарная сигнализация" + Environment.NewLine;
                                             contract.ps = "■ реагирование на сигналы пожар" + Environment.NewLine;
                                         }
                                         else
-                                            contract.ps = "□ реагирование на сигналы пожар" + Environment.NewLine;
+                                            //contract.ps = "□ реагирование на сигналы пожар" + Environment.NewLine;
+                                            contract.ps = "";
                                         if (bool.Parse(GuardObjectExBase.New_protection_trs.ToString())) {
                                             contract.ObjectTypeService += "экстренный выезд по тревожной сигнализации" + Environment.NewLine;
                                             contract.ObjectSignalization = "Тревожная сигнализация" + Environment.NewLine;
                                             contract.trs = "■ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
                                         }
                                         else
-                                            contract.trs = "□ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
+                                            //contract.trs = "□ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
+                                            contract.trs = "";
                                         contract.ObjectTypeService += "эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
                                         contract.service_security = "■ эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
                                         //if (bool.Parse(GuardObjectExBase.New_protection_os.ToString()) && bool.Parse(GuardObjectExBase.New_protection_ps.ToString()) && bool.Parse(GuardObjectExBase.New_protection_trs.ToString()))
@@ -231,10 +234,11 @@ namespace UnionContractWF {
                                             contract.BlockTypeDistinct = "□ c усеченной блокировкой;";
                                         }
                                         decimal _sum = 0;
+                                        int c = 1;
                                         using (DeviceExBaseContext deviceExBaseContext = new DeviceExBaseContext()) {
                                             foreach (RentDeviceExBase item in Rent_DeviceExBase) {
                                                 //contract.DeviceName += item.DeviceExBase.New_name + Environment.NewLine;
-                                                contract.DeviceName += deviceExBaseContext.DeviceExBase.FirstOrDefault(x => x.New_deviceId == item.New_device_rent_device).New_name + Environment.NewLine;
+                                                contract.DeviceName += c.ToString()+". " +deviceExBaseContext.DeviceExBase.FirstOrDefault(x => x.New_deviceId == item.New_device_rent_device).New_name + Environment.NewLine;
                                                 contract.DeviceCount += item.New_qty + Environment.NewLine;
                                                 if (item.New_price.HasValue)
                                                     contract.DeviceSum += (item.New_qty * Decimal.Round(decimal.Parse(item.New_price.ToString()), 2)) + Environment.NewLine;
