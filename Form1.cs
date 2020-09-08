@@ -87,7 +87,7 @@ namespace UnionContractWF {
                                                             + item.New_address + Environment.NewLine
                                                             + "Многоканальный телефон " + item.New_phone + Environment.NewLine
                                                             + item.New_info1 + Environment.NewLine
-                                                            + "ИНН " + item.New_inn + "КПП " + item.New_kpp + Environment.NewLine
+                                                            + "ИНН " + item.New_inn + " КПП " + item.New_kpp + Environment.NewLine
                                                             + "ОГРН " + item.New_ogrn + Environment.NewLine
                                                             + "Р/с " + item.New_bank_rs + Environment.NewLine
                                                             + item.New_bank_name + Environment.NewLine
@@ -117,7 +117,7 @@ namespace UnionContractWF {
                                                             +*/ item.New_address + Environment.NewLine
                                                             + "Многоканальный телефон " + item.New_phone + Environment.NewLine
                                                             + item.New_info1 + Environment.NewLine
-                                                            + "ИНН " + item.New_inn + "КПП " + item.New_kpp + Environment.NewLine
+                                                            + "ИНН " + item.New_inn + " КПП " + item.New_kpp + Environment.NewLine
                                                             + "ОГРН " + item.New_ogrn + Environment.NewLine
                                                             + "Р/с " + item.New_bank_rs + Environment.NewLine
                                                             + item.New_bank_name + Environment.NewLine
@@ -222,16 +222,16 @@ namespace UnionContractWF {
                                         //else
                                         //    contract.BlockType = "усеченной";
                                         if (GuardObjectExBase.New_dogovor_type == 1) {//стандартный тип договора
-                                            contract.BlockTypeFull = "■ c полной блокировкой;";
-                                            contract.BlockTypeDistinct = "□ c усеченной блокировкой;";
+                                            contract.BlockTypeFull = "■ c полной блокировкой";
+                                            contract.BlockTypeDistinct = "□ c усеченной блокировкой";
                                         }
                                         else if (GuardObjectExBase.New_dogovor_type == 2) {
-                                            contract.BlockTypeDistinct = "■ c усеченной блокировкой;";
-                                            contract.BlockTypeFull = "□ c полной блокировкой;";
+                                            contract.BlockTypeDistinct = "■ c усеченной блокировкой";
+                                            contract.BlockTypeFull = "□ c полной блокировкой";
                                         }
                                         else {
-                                            contract.BlockTypeFull = "□ c полной блокировкой;";
-                                            contract.BlockTypeDistinct = "□ c усеченной блокировкой;";
+                                            contract.BlockTypeFull = "□ c полной блокировкой";
+                                            contract.BlockTypeDistinct = "□ c усеченной блокировкой";
                                         }
                                         decimal _sum = 0;
                                         int c = 1;
@@ -246,6 +246,7 @@ namespace UnionContractWF {
                                                     contract.DeviceSum += Environment.NewLine;
                                                 if (!string.IsNullOrEmpty(item.New_price.ToString()) && !string.IsNullOrEmpty(item.New_qty.ToString()))
                                                     _sum += Decimal.Round((decimal)(item.New_qty * item.New_price), 2);
+                                                c++;
                                             }
                                         }
                                         contract.AllCount = Rent_DeviceExBase.Count.ToString();
