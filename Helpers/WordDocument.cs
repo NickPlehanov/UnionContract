@@ -102,7 +102,7 @@ namespace UnionContractWF.Helpers {
                 oDoc.Bookmarks.get_Item(ref Markers.ExecutorPositionName1).Range.Text = contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).Bossname;
                 oDoc.Bookmarks.get_Item(ref Markers.ClientName1).Range.Text = contract.ClientSmallName;
                 oDoc.Bookmarks.get_Item(ref Markers.ExecutorName3).Range.Text = contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).Name;
-                oDoc.Bookmarks.get_Item(ref Markers.CoExecutors).Range.Text = tm1.Substring(0, tm1.LastIndexOf(',') - 1);
+                oDoc.Bookmarks.get_Item(ref Markers.CoExecutors).Range.Text = tm1.Substring(0, tm1.LastIndexOf(','));
                 oDoc.Bookmarks.get_Item(ref Markers.ContractNumber1).Range.Text = contract.Number;
                 oDoc.Bookmarks.get_Item(ref Markers.ContractDate2).Range.Text = contract.Date;
                 oDoc.Bookmarks.get_Item(ref Markers.ClientFullNameAndObject).Range.Text = contract.ClientName+", "+contract.ObjectName;
