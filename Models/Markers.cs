@@ -92,6 +92,11 @@ namespace UnionContractWF.Models {
         public static object PS = "PS";
         public static object TRS = "TRS";
         public static object SecurityService = "Security_service";
+        public static object SendAct = "SendAct";
+        public static object OrderAct = "OrderAct";
+        public static object SignalingOS = "SignalingOS";
+        public static object SignalingPS = "SignalingPS";
+        public static object SignalingTRS = "SignalingTRS";
 
 
 

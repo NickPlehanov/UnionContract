@@ -27,6 +27,9 @@ namespace UnionContractWF.Models {
         public string SendActs { get; set; }
         public string PoryadokActs { get; set; }
         public string ObjectSignalization { get; set; }
+        public string SignalingOS { get; set; }
+        public string SignalingPS { get; set; }
+        public string SignalingTRS { get; set; }
 
         public string os { get; set; }
         public string ps { get; set; }

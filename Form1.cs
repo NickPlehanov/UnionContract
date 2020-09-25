@@ -193,24 +193,27 @@ namespace UnionContractWF {
                                         }
                                         if (bool.Parse(GuardObjectExBase.New_protection_os.ToString())) {
                                             contract.ObjectTypeService = "охрана имущества" + Environment.NewLine;
-                                            contract.ObjectSignalization = "Охранная сигнализация" + Environment.NewLine;
+                                            //contract.ObjectSignalization = "Охранная сигнализация" + Environment.NewLine;
                                             contract.os = "■ охрана имущества" + Environment.NewLine;
+                                            contract.SignalingOS = "Охранная сигнализация" + Environment.NewLine;
                                         }
                                         else
                                             //contract.os = "□ охрана имущества" + Environment.NewLine;                                            
                                             contract.os = "";
                                         if (bool.Parse(GuardObjectExBase.New_protection_ps.ToString())) {
                                             contract.ObjectTypeService += "реагирование на сигналы пожар" + Environment.NewLine;
-                                            contract.ObjectSignalization = "Пожарная сигнализация" + Environment.NewLine;
+                                            //contract.ObjectSignalization = "Пожарная сигнализация" + Environment.NewLine;
                                             contract.ps = "■ реагирование на сигналы пожар" + Environment.NewLine;
+                                            contract.SignalingPS = "Пожарная сигнализация" + Environment.NewLine;
                                         }
                                         else
                                             //contract.ps = "□ реагирование на сигналы пожар" + Environment.NewLine;
                                             contract.ps = "";
                                         if (bool.Parse(GuardObjectExBase.New_protection_trs.ToString())) {
                                             contract.ObjectTypeService += "экстренный выезд по тревожной сигнализации" + Environment.NewLine;
-                                            contract.ObjectSignalization = "Тревожная сигнализация" + Environment.NewLine;
+                                            //contract.ObjectSignalization = "Тревожная сигнализация" + Environment.NewLine;
                                             contract.trs = "■ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
+                                            contract.SignalingTRS = "Тревожная сигнализация" + Environment.NewLine;
                                         }
                                         else
                                             //contract.trs = "□ экстренный выезд по тревожной сигнализации" + Environment.NewLine;
