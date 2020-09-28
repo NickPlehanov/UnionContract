@@ -83,6 +83,7 @@
     <Compile Include="Models\Vityaz\AgreementBase.cs" />
     <Compile Include="Models\Vityaz\AgreementExBase.cs" />
     <Compile Include="Models\Vityaz\DeviceExBase.cs" />
+    <Compile Include="Models\Vityaz\DogovorTypeExBase.cs" />
     <Compile Include="Models\Vityaz\ExecutorExBase.cs" />
     <Compile Include="Models\Vityaz\GuardObjectExBase.cs" />
     <Compile Include="Models\Vityaz\RentDeviceExBase.cs" />

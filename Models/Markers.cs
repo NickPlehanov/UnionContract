@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnionContractWF.Models {
+﻿namespace UnionContractWF.Models {
     public static class Markers {
         public static object ContractNumber = "ContractNumber";
         public static object ContractDate = "ContractDate";
@@ -97,6 +91,8 @@ namespace UnionContractWF.Models {
         public static object SignalingOS = "SignalingOS";
         public static object SignalingPS = "SignalingPS";
         public static object SignalingTRS = "SignalingTRS";
+        public static object ClientReqInfo = "ClientReqInfo";
+        public static object ExecutorReqInfo = "ExecutorReqInfo";
 
 
 

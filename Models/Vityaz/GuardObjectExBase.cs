@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Windows.Forms;
 
 namespace UnionContractWF.Models.Vityaz {
     [Table("New_guard_objectExtensionBase")]

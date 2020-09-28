@@ -18,8 +18,20 @@ namespace UnionContractWF.Models.Vityaz {
         public int? New_send_acts { get; set; }
         public int? new_poryadok_acts { get; set; }
         public string new_smallname { get; set; }
+        /// <summary>
+        /// должность директора
+        /// </summary>
+        public string New_req_status { get; set; }
+        /// <summary>
+        /// на основании чего работает директор
+        /// </summary>
+        public string New_found { get; set; }
+        /// <summary>
+        /// ФИО директора
+        /// </summary>
+        public string New_req_boss_fio { get; set; }
 
-        
+
         private string _Send_acts { get; set; }
         [NotMapped]
         public string Send_acts {

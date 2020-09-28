@@ -49,7 +49,7 @@ namespace UnionContractWF.Helpers {
                 string CoExecutorsLicenseInfo = "";
                 foreach (ExecutorsInfo item in contract.Coexecutors.Where(x => x.Id != contract.ExecutorID))
                     CoExecutorsLicenseInfo += item.Name + ", " + item.LicenseInfo + ");" + Environment.NewLine;
-                TryGetItem(oDoc, Markers.CoExecutorsLicenseInfo,CoExecutorsLicenseInfo.Substring(0, CoExecutorsLicenseInfo.LastIndexOf(';')));
+                TryGetItem(oDoc, Markers.CoExecutorsLicenseInfo, CoExecutorsLicenseInfo.Length>0 ? CoExecutorsLicenseInfo.Substring(0, CoExecutorsLicenseInfo.LastIndexOf(';')) : null);
                 TryGetItem(oDoc, Markers.BlockTypeDistinct,contract.BlockTypeDistinct);
                 TryGetItem(oDoc, Markers.BlockTypeFull,contract.BlockTypeFull);
                 TryGetItem(oDoc, Markers.ObjectName,contract.ObjectName);
@@ -97,14 +97,14 @@ namespace UnionContractWF.Helpers {
                 TryGetItem(oDoc, Markers.ExecutorPositionName1,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).Bossname);
                 TryGetItem(oDoc, Markers.ClientName1,contract.ClientSmallName);
                 TryGetItem(oDoc, Markers.ExecutorName3,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).Name);
-                TryGetItem(oDoc, Markers.CoExecutors,tm1.Substring(0, tm1.LastIndexOf(',')));
+                TryGetItem(oDoc, Markers.CoExecutors,tm1.Length>0 ? tm1.Substring(0, tm1.LastIndexOf(',')):null);
                 TryGetItem(oDoc, Markers.ContractNumber1,contract.Number);
                 TryGetItem(oDoc, Markers.ContractDate2,contract.Date);
                 TryGetItem(oDoc, Markers.ClientFullNameAndObject,contract.ClientName + ", " + contract.ObjectName);
                 TryGetItem(oDoc, Markers.ObjectAddress2,contract.ObjectAddress);
                 foreach (ExecutorsInfo item in contract.Coexecutors)
                     tm2 += item.Name + ", ";
-                TryGetItem(oDoc, Markers.Executors,tm2.Substring(0, tm2.LastIndexOf(',') - 1));
+                TryGetItem(oDoc, Markers.Executors, tm2.Length>0 ? tm2.Substring(0, tm2.LastIndexOf(',') - 1):null);
                 TryGetItem(oDoc, Markers.ExecutorName4,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).Name);
                 TryGetItem(oDoc, Markers.ExecutorName5,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).Name);
                 TryGetItem(oDoc, Markers.LicenseNumber,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).LicNum);
@@ -120,7 +120,7 @@ namespace UnionContractWF.Helpers {
                     contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).BossPhone);
                 TryGetItem(oDoc, Markers.ExecutorPosition2,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).BossPosition);
                 TryGetItem(oDoc, Markers.ExecutorPositionName2,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).Bossname);
-                TryGetItem(oDoc, Markers.CoExecutors1,tm1.Substring(0, tm1.LastIndexOf(',') - 1));
+                TryGetItem(oDoc, Markers.CoExecutors1,tm1.Length>0 ? tm1.Substring(0, tm1.LastIndexOf(',') - 1): null);
                 TryGetItem(oDoc, Markers.OS,contract.os);
                 TryGetItem(oDoc, Markers.PS,contract.ps);
                 TryGetItem(oDoc, Markers.TRS,contract.trs);
@@ -131,6 +131,8 @@ namespace UnionContractWF.Helpers {
                 TryGetItem(oDoc, Markers.SignalingOS,contract.SignalingOS);
                 TryGetItem(oDoc, Markers.SignalingPS,contract.SignalingPS);
                 TryGetItem(oDoc, Markers.SignalingTRS,contract.SignalingTRS);
+                TryGetItem(oDoc, Markers.ExecutorReqInfo,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).LicenseInfo);
+                TryGetItem(oDoc, Markers.ClientReqInfo, contract.ClientReqInfo);
 
                 //oDoc.Bookmarks.get_Item(ref Markers.ContractNumber).Range.Text = contract.Number;
                 //oDoc.Bookmarks.get_Item(ref Markers.ContractDate).Range.Text = contract.DateFull;

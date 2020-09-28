@@ -12,6 +12,7 @@ namespace UnionContractWF.Models.Vityaz {
         public DateTime? New_date { get; set; }
         public Guid? New_bp_agreement { get; set; }
         public Guid? New_executor_agreement { get; set; }
+        public Guid? New_dogovor_type_agreement { get; set; }
     }
     public class AgreementExBaseContext : DbContext {
         public AgreementExBaseContext() : base("VityazMSCRMEntity") { }

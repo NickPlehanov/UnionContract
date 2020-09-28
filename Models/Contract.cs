@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.Word;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace UnionContractWF.Models {
@@ -30,6 +29,7 @@ namespace UnionContractWF.Models {
         public string SignalingOS { get; set; }
         public string SignalingPS { get; set; }
         public string SignalingTRS { get; set; }
+        public string ClientReqInfo { get; set; }
 
         public string os { get; set; }
         public string ps { get; set; }
