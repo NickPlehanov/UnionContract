@@ -31,6 +31,13 @@ namespace UnionContractWF.Models.Vityaz {
         /// </summary>
         public string New_req_boss_fio { get; set; }
 
+        public string New_req_ogrn { get; set; }
+        public string New_req_kpp { get; set; }
+        public string New_bank_name { get; set; }
+        public string New_bank_bik { get; set; }
+        public string New_bank_rs { get; set; }
+        public string New_bank_ks { get; set; }
+
 
         private string _Send_acts { get; set; }
         [NotMapped]
