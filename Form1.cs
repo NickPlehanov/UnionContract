@@ -186,7 +186,9 @@ namespace UnionContractWF {
 											contract.ClientReqInfo = "в лице " + AccountExBase.New_req_status + " " + AccountExBase.New_req_boss_fio + ", действующего на основании " + AccountExBase.New_found;
 											contract.ExecutorID = AgreementExBase.New_executor_agreement;
 											contract.Number = AgreementExBase.New_number.ToString();
-											contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString();
+											//contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString(); 
+											if(DateTime.TryParse(AgreementExBase.New_date.ToString(), out _))
+												contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString();
 											contract.ClientName = AccountBase.Name;
 											if(AccountExBase.New_agent_type == 1)
 												contract.ClientSmallName = AccountExBase.new_smallname;												
