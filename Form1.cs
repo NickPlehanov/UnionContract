@@ -297,8 +297,10 @@ namespace UnionContractWF {
 											contract.AllCount = Rent_DeviceExBase.Count.ToString();
 											contract.AllSum = _sum.ToString();
 											contract.Coexecutors = executorsInfos;
+											contract.arrivar_day = GuardObjectExBase.New_arrival_time_day;
+											contract.arrivar_night = GuardObjectExBase.New_arrival_time_night;
 											string tmp = TypesTemplates.FirstOrDefault(x => x.ttmp_ctp_ID == SelectedContractTypes.ctp_ID).ttmp_tmp;
-											WordDocument.Exchange(contract, tmp, @"\\server-nass\Install\ИСХОДНИКИ\Шаблоны договоров\tmp\" + contract.Number + ".docx");
+											WordDocument.Exchange(contract, tmp, @"\\server-nass\Install\ИСХОДНИКИ\Шаблоны договоров\tmp\" + contract.Number+" "+ contract.ClientName + ".docx");
 										}
 									}
 								}

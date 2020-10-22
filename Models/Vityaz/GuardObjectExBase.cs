@@ -17,6 +17,8 @@ namespace UnionContractWF.Models.Vityaz {
         public string New_monthlypay { get; set; }
         public Guid? New_account { get; set; }
         public int? New_dogovor_type { get; set; }
+        public string New_arrival_time_day { get; set; }
+        public string New_arrival_time_night { get; set; }
     }
     public class GuardObjectExBaseContext : DbContext {
         public GuardObjectExBaseContext() : base("VityazMSCRMEntity") { }

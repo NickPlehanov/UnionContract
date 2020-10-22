@@ -93,13 +93,8 @@
         public static object SignalingTRS = "SignalingTRS";
         public static object ClientReqInfo = "ClientReqInfo";
         public static object ExecutorReqInfo = "ExecutorReqInfo";
-
-
-
-
-
-
-
+        public static object ArrivalDay = "ArrivalDay";
+        public static object ArrivalNight = "ArrivalNight";
 
 
 

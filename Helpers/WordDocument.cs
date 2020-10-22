@@ -133,6 +133,8 @@ namespace UnionContractWF.Helpers {
                 TryGetItem(oDoc, Markers.SignalingTRS,contract.SignalingTRS);
                 TryGetItem(oDoc, Markers.ExecutorReqInfo,contract.Coexecutors.FirstOrDefault(x => x.Id == contract.ExecutorID).LicenseInfo);
                 TryGetItem(oDoc, Markers.ClientReqInfo, contract.ClientReqInfo);
+                TryGetItem(oDoc, Markers.ArrivalDay, contract.arrivar_day);
+                TryGetItem(oDoc, Markers.ArrivalNight, contract.arrivar_night);
 
                 //oDoc.Bookmarks.get_Item(ref Markers.ContractNumber).Range.Text = contract.Number;
                 //oDoc.Bookmarks.get_Item(ref Markers.ContractDate).Range.Text = contract.DateFull;

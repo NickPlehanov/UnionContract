@@ -35,6 +35,8 @@ namespace UnionContractWF.Models {
         public string ps { get; set; }
         public string trs { get; set; } 
         public string service_security { get; set; }
+        public string arrivar_day { get; set; }
+        public string arrivar_night { get; set; }
 
         private string _DateFull {
             get {
