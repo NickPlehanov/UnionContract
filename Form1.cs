@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NPetrovich;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -183,7 +184,9 @@ namespace UnionContractWF {
 											}
 											//основные поля договора
 											Contract contract = new Contract();
-											contract.ClientReqInfo = "в лице " + AccountExBase.New_req_status + " " + AccountExBase.New_req_boss_fio + ", действующего на основании " + AccountExBase.New_found;
+
+											contract.ClientReqInfo = "в лице "+ GetGenitive(AccountExBase.New_req_status + " " + AccountExBase.New_req_boss_fio) + ", действующего на основании " + AccountExBase.New_found;
+											//contract.ClientReqInfo = "в лице " + AccountExBase.New_req_status + " " + AccountExBase.New_req_boss_fio + ", действующего на основании " + AccountExBase.New_found;
 											contract.ExecutorID = AgreementExBase.New_executor_agreement;
 											contract.Number = AgreementExBase.New_number.ToString();
 											//contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString(); 
@@ -191,8 +194,8 @@ namespace UnionContractWF {
 												contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString();
 											contract.ClientName = AccountBase.Name;
 											if(AccountExBase.New_agent_type == 1)
-												contract.ClientSmallName = AccountExBase.new_smallname;												
-												//contract.ClientSmallName = GetSmallName(AccountExBase.new_smallname);
+												contract.ClientSmallName = AccountExBase.new_smallname;
+											//contract.ClientSmallName = GetSmallName(AccountExBase.new_smallname);
 											else if(AccountExBase.New_agent_type == 2)
 												contract.ClientSmallName = GetSmallName(AccountExBase.New_req_boss_fio);
 											contract.ObjectName = GuardObjectExBase.New_name;
@@ -224,8 +227,8 @@ namespace UnionContractWF {
 											if(AccountExBase.New_agent_type == 2)//юр.лицо
 											{
 												string pass_date = DateTime.TryParse(AccountExBase.New_pass_date.ToString(), out _) ? DateTime.Parse(AccountExBase.New_pass_date.ToString()).AddHours(5).ToShortDateString() + Environment.NewLine : "" + Environment.NewLine;
-												contract.ClientInfo = AccountBase.Name + Environment.NewLine
-													+ "ИНН " + AccountExBase.New_req_inn + " КПП " + AccountExBase.New_req_kpp + Environment.NewLine
+												contract.ClientInfo = /*AccountBase.Name + Environment.NewLine
+													+*/ "ИНН " + AccountExBase.New_req_inn + " КПП " + AccountExBase.New_req_kpp + Environment.NewLine
 													+ "ОГРН: " + AccountExBase.New_req_ogrn + Environment.NewLine
 													+ "Р/с: " + AccountExBase.New_bank_rs + Environment.NewLine
 													+ AccountExBase.New_bank_name + Environment.NewLine
@@ -249,7 +252,7 @@ namespace UnionContractWF {
 												contract.OwningUser = systemUserBaseContext.SystemUserBase.FirstOrDefault(x => x.SystemUserId == AgreementBase.OwningUser).FullName;
 											}
 											if(bool.Parse(GuardObjectExBase.New_protection_os.ToString())) {
-												contract.ObjectTypeService = "охрана имущества" + Environment.NewLine;
+												contract.ObjectTypeService += "охрана имущества" + Environment.NewLine;
 												contract.os = "■ охрана имущества" + Environment.NewLine;
 												contract.SignalingOS = "Охранная сигнализация" + Environment.NewLine;
 											}
@@ -301,8 +304,10 @@ namespace UnionContractWF {
 											contract.AllCount = Rent_DeviceExBase.Count.ToString();
 											contract.AllSum = _sum.ToString();
 											contract.Coexecutors = executorsInfos;
+											contract.PositionAndSmallName= AccountExBase.New_req_status + Environment.NewLine + AccountExBase.new_smallname;
+											contract.SmallFirmName = AccountExBase.new_smallname;
 											string tmp = TypesTemplates.FirstOrDefault(x => x.ttmp_ctp_ID == SelectedContractTypes.ctp_ID).ttmp_tmp;
-											WordDocument.Exchange(contract, tmp, @"\\server-nass\Install\ИСХОДНИКИ\Шаблоны договоров\tmp\" + contract.Number+" "+ contract.ClientName + ".docx");
+											WordDocument.Exchange(contract, tmp, @"\\server-nass\Install\ИСХОДНИКИ\Шаблоны договоров\tmp\" + contract.Number + " " + contract.ClientName + ".docx");
 										}
 									}
 								}
@@ -313,6 +318,28 @@ namespace UnionContractWF {
 			}
 		}
 
+		public string GetGenitive(string str) {
+			if(string.IsNullOrEmpty(str))
+				return null;
+			else {
+				string[] words = new string[10];
+				words = str.Split(' ');
+				var Genetive = new Petrovich() {
+					AutoDetectGender = true,
+					LastName = words[1],
+					FirstName = words[2],
+					MiddleName = words[3]
+				};
+				var inflected = Genetive.InflectTo(Case.Genitive);
+
+				var GenetivePosition = new Petrovich() {
+					AutoDetectGender = true,
+					FirstName = words[0].ToLower()
+				};
+				return GenetivePosition.InflectFirstNameTo(Case.Genitive) + " " + inflected.LastName + " " + inflected.FirstName + " " + inflected.MiddleName;
+			}
+		}
+
 		public string GetSmallName(string FullName) {
 			string ret = null;
 			if(string.IsNullOrEmpty(FullName))
@@ -320,8 +347,8 @@ namespace UnionContractWF {
 			else {
 				string[] _n = FullName.Split(' ');
 				if(_n.Count() > 0) {
-					ret += _n[0].ToString()+" ";
-					for(int i = 0;i < _n.Count()-1;i++) 
+					ret += _n[0].ToString() + " ";
+					for(int i = 0; i < _n.Count() - 1; i++)
 						ret += _n[i + 1].Substring(0, 1) + ". ";
 					return ret;
 				}

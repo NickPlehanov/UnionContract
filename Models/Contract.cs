@@ -55,6 +55,8 @@ namespace UnionContractWF.Models {
                 _DateFull = value;
             }
         }
+        public string PositionAndSmallName { get; set; }
+        public string SmallFirmName { get; set; }
 
         private string GetMonthName(int number) {
             switch (number) {

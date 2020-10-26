@@ -95,6 +95,11 @@
         public static object ExecutorReqInfo = "ExecutorReqInfo";
         public static object ArrivalDay = "ArrivalDay";
         public static object ArrivalNight = "ArrivalNight";
+        public static object ClientPositionAndName = "ClientPositionAndName";
+        public static object ActDate = "ActDate";
+        public static object PositionAndSmallName = "PositionAndSmallName";
+        public static object SmallFirmName = "SmallFirmName";
+        public static object ClientName2 = "ClientName2";
 
 
 

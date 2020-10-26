@@ -68,6 +68,7 @@ namespace UnionContractWF.Helpers {
 				TryGetItem(oDoc, Markers.ClientFullName1, contract.ClientName);
 				TryGetItem(oDoc, Markers.ClientFullInfo, contract.ClientInfo);
 				TryGetItem(oDoc, Markers.ClientName, contract.ClientSmallName);
+				TryGetItem(oDoc, Markers.ClientName2, contract.ClientSmallName);
 				string tm = string.Empty;
 				string tm1 = string.Empty;
 				string tm2 = string.Empty;
@@ -140,6 +141,10 @@ namespace UnionContractWF.Helpers {
 				TryGetItem(oDoc, Markers.ClientReqInfo, contract.ClientReqInfo);
 				TryGetItem(oDoc, Markers.ArrivalDay, contract.arrivar_day);
 				TryGetItem(oDoc, Markers.ArrivalNight, contract.arrivar_night);
+				TryGetItem(oDoc, Markers.ClientPositionAndName, contract.ClientReqInfo);
+				TryGetItem(oDoc, Markers.ActDate, contract.Date ?? "____.___________.20____ г.");
+				TryGetItem(oDoc, Markers.PositionAndSmallName, contract.PositionAndSmallName);
+				TryGetItem(oDoc, Markers.SmallFirmName, contract.SmallFirmName?? "____________________________");
 
 				oWord.Visible = true;
 

@@ -22,6 +22,14 @@ namespace UnionContractWF.Models.Vityaz {
         /// должность директора
         /// </summary>
         public string New_req_status { get; set; }
+   //     [NotMapped]
+   //     public string New_req_status_rodit {
+   //         get => New_req_status.ToLower() + "а";
+			//set {
+   //             if(value != null)
+   //                 New_req_status = New_req_status.ToLower() + "а";
+			//}
+   //     }
         /// <summary>
         /// на основании чего работает директор
         /// </summary>
