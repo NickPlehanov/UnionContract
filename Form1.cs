@@ -272,8 +272,8 @@ namespace UnionContractWF {
 											}
 											else
 												contract.trs = "";
-											contract.ObjectTypeService += "эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
-											contract.service_security = "■ эксплуатационное обслуживание средств сигнализации" + Environment.NewLine;
+											contract.ObjectTypeService += "эксплуатационное обслуживание средств сигнализации (за исключением пожарной сигнализации)" + Environment.NewLine;
+											contract.service_security = "■ эксплуатационное обслуживание средств сигнализации (за исключением пожарной сигнализации)" + Environment.NewLine;
 											if(GuardObjectExBase.New_dogovor_type == 1) {//стандартный тип договора
 												contract.BlockTypeFull = "■ c полной блокировкой";
 												contract.BlockTypeDistinct = "□ c усеченной блокировкой";
