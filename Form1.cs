@@ -193,10 +193,10 @@ namespace UnionContractWF {
 											if(DateTime.TryParse(AgreementExBase.New_date.ToString(), out _))
 												contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString();
 											contract.ClientName = AccountBase.Name;
-											if(AccountExBase.New_agent_type == 1)
+											if(AccountExBase.New_agent_type == 1)//физ. лицо
 												contract.ClientSmallName = AccountExBase.new_smallname;
 											//contract.ClientSmallName = GetSmallName(AccountExBase.new_smallname);
-											else if(AccountExBase.New_agent_type == 2)
+											else if(AccountExBase.New_agent_type == 2)//юр лицо
 												contract.ClientSmallName = GetSmallName(AccountExBase.New_req_boss_fio);
 											contract.ObjectName = GuardObjectExBase.New_name;
 											contract.ObjectAddress = GuardObjectExBase.New_addr_kladr;
@@ -249,7 +249,8 @@ namespace UnionContractWF {
 													+ "Почтовый адрес: " + AccountExBase.New_fact_addr_kladr + Environment.NewLine
 													+ "e-mail: " + AccountBase.EMailAddress1;
 											using(SystemUserBaseContext systemUserBaseContext = new SystemUserBaseContext()) {
-												contract.OwningUser = systemUserBaseContext.SystemUserBase.FirstOrDefault(x => x.SystemUserId == AgreementBase.OwningUser).FullName;
+												contract.OwningUser = systemUserBaseContext.SystemUserBase.FirstOrDefault(x => x.SystemUserId == AgreementBase.OwningUser).FullName+" "+
+													systemUserBaseContext.SystemUserBase.FirstOrDefault(x => x.SystemUserId == AgreementBase.OwningUser).MobilePhone;
 											}
 											if(bool.Parse(GuardObjectExBase.New_protection_os.ToString())) {
 												contract.ObjectTypeService += "охрана имущества" + Environment.NewLine;
@@ -324,19 +325,23 @@ namespace UnionContractWF {
 			else {
 				string[] words = new string[10];
 				words = str.Split(' ');
-				var Genetive = new Petrovich() {
-					AutoDetectGender = true,
-					LastName = words[1],
-					FirstName = words[2],
-					MiddleName = words[3]
-				};
-				var inflected = Genetive.InflectTo(Case.Genitive);
+				if(words.Length == 4) {
+					var Genetive = new Petrovich() {
+						AutoDetectGender = true,
+						LastName = words[1],
+						FirstName = words[2],
+						MiddleName = words[3]
+					};
+					var inflected = Genetive.InflectTo(Case.Genitive);
 
-				var GenetivePosition = new Petrovich() {
-					AutoDetectGender = true,
-					FirstName = words[0].ToLower()
-				};
-				return GenetivePosition.InflectFirstNameTo(Case.Genitive) + " " + inflected.LastName + " " + inflected.FirstName + " " + inflected.MiddleName;
+					var GenetivePosition = new Petrovich() {
+						AutoDetectGender = true,
+						FirstName = words[0].ToLower()
+					};
+					return GenetivePosition.InflectFirstNameTo(Case.Genitive) + " " + inflected.LastName + " " + inflected.FirstName + " " + inflected.MiddleName;
+				}
+				else
+					return null;
 			}
 		}
 

@@ -9,6 +9,7 @@ namespace UnionContractWF.Models {
         [Key]
         public Guid SystemUserId { get; set; }
         public string FullName { get; set; }
+        public string MobilePhone { get; set; }
     }
     public class SystemUserBaseContext : DbContext {
         public SystemUserBaseContext() : base("VityazMSCRMEntity") { }
