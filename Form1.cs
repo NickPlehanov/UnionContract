@@ -184,8 +184,10 @@ namespace UnionContractWF {
 											}
 											//основные поля договора
 											Contract contract = new Contract();
-
-											contract.ClientReqInfo = "в лице "+ GetGenitive(AccountExBase.New_req_status + " " + AccountExBase.New_req_boss_fio) + ", действующего на основании " + AccountExBase.New_found;
+											if(AccountExBase.New_agent_type == 2) //юр.лицо
+												contract.ClientReqInfo = "в лице "+ GetGenitive(AccountExBase.New_req_status + " " + AccountExBase.New_req_boss_fio) + ", действующего на основании " + AccountExBase.New_found;
+											else
+												contract.ClientReqInfo = "";
 											//contract.ClientReqInfo = "в лице " + AccountExBase.New_req_status + " " + AccountExBase.New_req_boss_fio + ", действующего на основании " + AccountExBase.New_found;
 											contract.ExecutorID = AgreementExBase.New_executor_agreement;
 											contract.Number = AgreementExBase.New_number.ToString();
@@ -193,10 +195,10 @@ namespace UnionContractWF {
 											if(DateTime.TryParse(AgreementExBase.New_date.ToString(), out _))
 												contract.Date = DateTime.Parse(AgreementExBase.New_date.ToString()).AddHours(5).ToShortDateString();
 											contract.ClientName = AccountBase.Name;
-											if(AccountExBase.New_agent_type == 1)//физ. лицо
+											if(AccountExBase.New_agent_type == 1 || AccountExBase.New_agent_type == 3)//физ. лицо
 												contract.ClientSmallName = AccountExBase.new_smallname;
 											//contract.ClientSmallName = GetSmallName(AccountExBase.new_smallname);
-											else if(AccountExBase.New_agent_type == 2)//юр лицо
+											else if(AccountExBase.New_agent_type == 2 )//юр лицо
 												contract.ClientSmallName = GetSmallName(AccountExBase.New_req_boss_fio);
 											contract.ObjectName = GuardObjectExBase.New_name;
 											contract.ObjectAddress = GuardObjectExBase.New_addr_kladr;
@@ -210,7 +212,7 @@ namespace UnionContractWF {
 											contract.ObjectMonthlyPay += "(" + numByWords.NumPhrase(ulong.Parse(String.Format("{0,-10:F}", GuardObjectExBase.New_monthlypay.ToString())), true) + ")";
 											contract.SendActs = AccountExBase.Send_acts;
 											contract.PoryadokActs = AccountExBase.Poryadok_acts;
-											if(AccountExBase.New_agent_type == 1) //физ.лицо
+											if(AccountExBase.New_agent_type == 1 || AccountExBase.New_agent_type == 3) //физ.лицо
 											{
 												string pass_date = DateTime.TryParse(AccountExBase.New_pass_date.ToString(), out _) ? DateTime.Parse(AccountExBase.New_pass_date.ToString()).AddHours(5).ToShortDateString() + Environment.NewLine : "" + Environment.NewLine;
 												contract.ClientInfo = AccountBase.Name + Environment.NewLine
@@ -224,7 +226,7 @@ namespace UnionContractWF {
 												contract.arrivar_day = GuardObjectExBase.New_arrival_time_day ?? "3-15";
 												contract.arrivar_night = GuardObjectExBase.New_arrival_time_night ?? "3-12";
 											}
-											if(AccountExBase.New_agent_type == 2)//юр.лицо
+											if(AccountExBase.New_agent_type == 2 )//юр.лицо
 											{
 												string pass_date = DateTime.TryParse(AccountExBase.New_pass_date.ToString(), out _) ? DateTime.Parse(AccountExBase.New_pass_date.ToString()).AddHours(5).ToShortDateString() + Environment.NewLine : "" + Environment.NewLine;
 												contract.ClientInfo = /*AccountBase.Name + Environment.NewLine
