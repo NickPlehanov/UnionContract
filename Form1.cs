@@ -212,11 +212,25 @@ namespace UnionContractWF {
 											contract.ObjectMonthlyPay += "(" + numByWords.NumPhrase(ulong.Parse(String.Format("{0,-10:F}", GuardObjectExBase.New_monthlypay.ToString())), true) + ")";
 											contract.SendActs = AccountExBase.Send_acts;
 											contract.PoryadokActs = AccountExBase.Poryadok_acts;
-											if(AccountExBase.New_agent_type == 1 || AccountExBase.New_agent_type == 3) //физ.лицо
+											if(AccountExBase.New_agent_type == 1) //физ.лицо
 											{
 												string pass_date = DateTime.TryParse(AccountExBase.New_pass_date.ToString(), out _) ? DateTime.Parse(AccountExBase.New_pass_date.ToString()).AddHours(5).ToShortDateString() + Environment.NewLine : "" + Environment.NewLine;
 												contract.ClientInfo = AccountBase.Name + Environment.NewLine
 													+ "ИНН " + AccountExBase.New_req_inn + Environment.NewLine
+													+ "Адрес регистрации: " + AccountExBase.New_fact_addr_kladr + Environment.NewLine
+													+ "Почтовый адрес: " + AccountExBase.New_fact_addr_kladr + Environment.NewLine
+													+ "Серия: " + AccountExBase.New_pass_serial + " Номер: " + AccountExBase.New_pass_number + Environment.NewLine
+													+ "Выдан: " + AccountExBase.New_pass_issued + Environment.NewLine
+													+ "Дата выдачи: " + pass_date
+													+ "e-mail: " + AccountBase.EMailAddress1;
+												contract.arrivar_day = GuardObjectExBase.New_arrival_time_day ?? "3-15";
+												contract.arrivar_night = GuardObjectExBase.New_arrival_time_night ?? "3-12";
+											}
+											if(AccountExBase.New_agent_type == 3) {//ИП
+												string pass_date = DateTime.TryParse(AccountExBase.New_pass_date.ToString(), out _) ? DateTime.Parse(AccountExBase.New_pass_date.ToString()).AddHours(5).ToShortDateString() + Environment.NewLine : "" + Environment.NewLine;
+												contract.ClientInfo = AccountBase.Name + Environment.NewLine
+													+ "ИНН " + AccountExBase.New_req_inn + Environment.NewLine
+													+ "ОГРН: " + AccountExBase.New_req_ogrn + Environment.NewLine
 													+ "Адрес регистрации: " + AccountExBase.New_fact_addr_kladr + Environment.NewLine
 													+ "Почтовый адрес: " + AccountExBase.New_fact_addr_kladr + Environment.NewLine
 													+ "Серия: " + AccountExBase.New_pass_serial + " Номер: " + AccountExBase.New_pass_number + Environment.NewLine
