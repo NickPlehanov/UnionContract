@@ -306,7 +306,7 @@ namespace UnionContractWF {
 											decimal _sum = 0;
 											int c = 1;
 											using(DeviceExBaseContext deviceExBaseContext = new DeviceExBaseContext()) {
-												foreach(RentDeviceExBase item in Rent_DeviceExBase) {
+												foreach(RentDeviceExBase item in Rent_DeviceExBase.Where(x=>x.New_device_rent_device!=null)) {
 													contract.DeviceName += c.ToString() + ". " + deviceExBaseContext.DeviceExBase.FirstOrDefault(x => x.New_deviceId == item.New_device_rent_device).New_name + Environment.NewLine;
 													contract.DeviceCount += item.New_qty + Environment.NewLine;
 													if(item.New_price.HasValue)
